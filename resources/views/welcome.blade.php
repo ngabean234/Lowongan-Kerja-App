@@ -178,53 +178,6 @@
     </main> --}}
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white p-10 mt-10">
-        <div class="container mx-auto grid md:grid-cols-4 gap-8">
-            <!-- Logo & Contact -->
-            <div>
-                <h2 class="text-xl font-bold mb-3 flex items-center">
-                    <span class="mr-2">&#128188;</span> LowKer
-                </h2>
-                <p>LowKer adalah platform pencari pekerjaan yang dirancang untuk membantu para pencari kerja menemukan peluang karier terbaik dengan mudah dan cepat.</p>
-            </div>
-
-            <!-- Quick Links -->
-            <div>
-                <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-yellow-400">About</a></li>
-                    <li><a href="#" class="hover:text-yellow-400">Contact</a></li>
-                    <li><a href="#" class="hover:text-yellow-400">Pricing</a></li>
-                    <li><a href="#" class="hover:text-yellow-400">Blog</a></li>
-                </ul>
-            </div>
-
-            <!-- Candidate -->
-            <div>
-                <h3 class="text-lg font-semibold mb-3">Candidate</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-yellow-400">Browse Jobs</a></li>
-                    <li><a href="#" class="hover:text-yellow-400">Browse Employers</a></li>
-                    <li><a href="#" class="hover:text-yellow-400">Candidate Dashboard</a></li>
-                    <li><a href="#" class="hover:text-yellow-400">Saved Jobs</a></li>
-                </ul>
-            </div>
-
-            <!-- Employers -->
-            <div>
-                <h3 class="text-lg font-semibold mb-3">Employers</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-yellow-400">Post a Job</a></li>
-                    <li><a href="#" class="hover:text-yellow-400">Browse Candidates</a></li>
-                    <li><a href="#" class="hover:text-yellow-400">Employers Dashboard</a></li>
-                    <li><a href="#" class="hover:text-yellow-400">Applications</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="border-t border-gray-700 mt-8 pt-5 text-center text-gray-400">
-            &copy; 2025 LowKer. All rights reserved.
-        </div>
-    </footer>
+    <x-footer></x-footer>
 </body>
 </html>
