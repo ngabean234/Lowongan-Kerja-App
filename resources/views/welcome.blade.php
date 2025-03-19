@@ -14,8 +14,8 @@
             <h1 class="text-xl font-bold text-yellow-400">LowKer</h1>
             <ul class="flex space-x-6">
                 <li><a href="#" class="hover:text-yellow-400">Home</a></li>
-                <li><a href="#" class="hover:text-yellow-400">Pages</a></li>
-                <li><a href="#" class="hover:text-yellow-400">Jobs</a></li>
+                <li><a href="#lowongan-section" class="hover:text-yellow-400">Lowongan</a></li>
+                <li><a href="#perusahaan-section" class="hover:text-yellow-400">Perusahaan</a></li>
                 <li><a href="#" class="hover:text-yellow-400">Employers</a></li>
                 <li><a href="#" class="hover:text-yellow-400">Blog</a></li>
             </ul>
@@ -75,7 +75,7 @@
         </section>
 
         <!-- Featured Jobs Section -->
-        <section class="container mx-auto mt-10 pb-10 p-10">
+        <section id="lowongan-section" class="container mx-auto mt-10 pb-10 p-10">
             <h2 class="text-3xl font-bold mb-6">Lowongan <span class="text-yellow-400">Terbaru</span></h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Featured Job Cards -->
@@ -117,7 +117,7 @@
         </section>
 
         <!-- Featured Companies Section -->
-        <section class="container mx-auto mt-10 pb-10 p-10">
+        <section id="perusahaan-section" class="container mx-auto mt-10 pb-10 p-10">
             <h2 class="text-3xl font-bold mb-6">Perusahaan <span class="text-yellow-400">Terbaru</span></h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Featured Company Cards -->
@@ -156,5 +156,17 @@
 
     <!-- Footer -->
     <x-footer></x-footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        </script>
 </body>
 </html>

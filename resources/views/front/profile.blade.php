@@ -27,6 +27,13 @@
 
             <div class="mt-5">
                 <a href="{{ route('front.editprofile')}}" class="btn btn-primary">Edit Profil</a>
+                <a href="{{ route('logout') }}" 
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
+                class="btn btn-danger">Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
 </x-layout>

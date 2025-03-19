@@ -77,3 +77,5 @@ Route::middleware(['auth', 'role:company'])->group(function () {
 // Public Job Routes
 Route::get('/search-jobs', [JobController::class, 'search'])->name('search.jobs');
 Route::get('/jobs/{job}', [JobController::class, 'publicShow'])->name('jobs.public.show');
+
+Route::get('/lowongan', [JobController::class, 'index']);

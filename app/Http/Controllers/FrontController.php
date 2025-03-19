@@ -7,24 +7,51 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-
 /**
  * Class FrontController
  * @package App\Http\Controllers
  */
 class FrontController extends Controller
 {
+    /**
+     * Get featured jobs and companies for views
+     *
+     * @return array
+     */
+    private function getFeaturedData()
+    {
+        $featuredJobs = \App\Models\Job::with(['company', 'jobType', 'city'])
+                    ->where('archived', 'N')
+                    ->latest()
+                    ->take(8)
+                    ->get();
+        $featuredCompanies = \App\Models\Company::with(['jobs', 'city'])
+                    ->where('archived', 'N')
+                    ->latest()
+                    ->take(8)
+                    ->get();
+                    
+        return [
+            'featuredJobs' => $featuredJobs,
+            'featuredCompanies' => $featuredCompanies
+        ];
+    }
+
     public function about(){
-        return view('front.about', ['title' => 'about']);
+        $data = $this->getFeaturedData();
+        return view('front.about', array_merge(['title' => 'about'], $data));
     }
     public function contact(){
-        return view('front.contact', ['title' => 'contact']);
+        $data = $this->getFeaturedData();
+        return view('front.contact', array_merge(['title' => 'contact'], $data));
     }
     public function profile(){
-        return view('front.profile', ['title' => 'profile']);
+        $data = $this->getFeaturedData();
+        return view('front.profile', array_merge(['title' => 'profile'], $data));
     }
     public function editprofile(){
-        return view('front.editprofile', ['title' => 'editprofile']);
+        $data = $this->getFeaturedData();
+        return view('front.editprofile', array_merge(['title' => 'editprofile'], $data));
     }
     public function updateProfile(Request $request)
 {
@@ -61,9 +88,11 @@ class FrontController extends Controller
     return redirect()->route('front.profile')->with('success', 'Profil Anda berhasil diperbarui!');
 }
     public function help(){
-        return view('front.help', ['title' => 'help']);
+        $data = $this->getFeaturedData();
+        return view('front.help', array_merge(['title' => 'help'], $data));
     }
     public function comunity(){
-        return view('front.comunity', ['title' => 'comunity']);
+        $data = $this->getFeaturedData();
+        return view('front.comunity', array_merge(['title' => 'comunity'], $data));
     }
 }
