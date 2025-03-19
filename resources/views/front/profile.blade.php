@@ -20,7 +20,7 @@
             </div>
 
             <div class="mt-5">
-                <a href="#" class="btn btn-primary">Edit Profil</a>
+                <a href="{{ route('front.editprofile')}}" class="btn btn-primary">Edit Profil</a>
             </div>
         </div>
 </x-layout>

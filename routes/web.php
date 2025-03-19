@@ -5,6 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\CompanyAuthController;
+use App\Http\Controllers\CompanyDashboardController;
+use App\Http\Controllers\Company\JobController as CompanyJobController;
 
 /*
 |--------------------------------------------------------------------------
