@@ -5,7 +5,13 @@
 
         <div class="bg-white p-5 rounded-lg shadow-md mt-5">
             <div class="flex items-center mb-4">
-                <img src="{{ Auth::user()->profile_photo_url ?? 'default-avatar.png' }}" alt="Profil Icon" class="w-16 h-16 rounded-full">
+                <div style="width: 64px; height: 64px;" class="rounded-full overflow-hidden bg-light d-flex align-items-center justify-content-center">
+                    @if(Auth::user()->profile_photo)
+                        <img src="{{ Auth::user()->profile_photo_url }}" alt="Profil Icon" class="img-fluid">
+                    @else
+                        <i class="bi bi-person-circle fs-1 text-secondary"></i>
+                    @endif
+                </div>
                 <div class="ml-4">
                     <h2 class="text-gray-800 font-semibold">{{ Auth::user()->name }}</h2>
                     <p class="text-gray-600">{{ Auth::user()->email }}</p>

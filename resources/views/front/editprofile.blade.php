@@ -39,15 +39,35 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="profile_picture" class="block text-sm font-medium text-gray-700">Foto Profil</label>
+                    <label for="profile_photo" class="form-label fw-medium">
+                        <i class="bi bi-image me-2"></i>Foto Profil
+                    </label>
+
+                    @if(Auth::user()->profile_photo)
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="bg-light rounded-3 p-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+                                <img src="{{ asset(Auth::user()->profile_photo) }}"
+                                     class="img-fluid rounded object-fit-contain" 
+                                     alt="Foto Profil">
+                            </div>
+                            <div class="ms-3">
+                                <span class="badge bg-success">Foto Profil Aktif</span>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
                     <input type="file"
-                           class="font text-gray-700"
-                           id="profile_picture"
-                           name="profile_picture"
-                           accept="image/*"
-                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                    @error('profile_picture')
-                        <span class="text-red-600 text-sm">{{ $message }}</span>
+                           class="form-control @error('profile_photo') is-invalid @enderror"
+                           id="profile_photo"
+                           name="profile_photo"
+                           accept="image/*">
+                    <div class="form-text">
+                        <i class="bi bi-info-circle me-1"></i>Pilih gambar dengan format JPG, PNG, atau GIF (maks 2MB)
+                    </div>
+                    @error('profile_photo')
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
