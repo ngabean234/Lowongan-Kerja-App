@@ -20,7 +20,12 @@
             </div>
 
             <div class="mt-5">
-                <a href="#" class="btn btn-primary">Edit Profil</a> 
+                <a href="{{ route('front.editprofile') }}" class="btn btn-primary">Edit Profil</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+
             </div>
         </div>
 </x-layout>

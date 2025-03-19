@@ -22,7 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'profile_photo'
     ];
 
     /**
@@ -49,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Company::class);
     }
+    public function getProfilePhotoUrlAttribute()
+    {
+    return $this->profile_photo ? asset('storage/' . $this->profile_photo) : asset('default-avatar.png');
+    }
+
 }

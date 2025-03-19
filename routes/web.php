@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\CompanyAuthController;
+use App\Http\Controllers\CompanyDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,8 @@ Route::get('/welcome', [DashboardController::class, 'welcome'])->name('welcome')
 Route::get('/about', [FrontController::class, 'about'])->name('front.about');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 Route::get('/profile', [FrontController::class, 'profile'])->name('front.profile');
+Route::get('/editprofile', [FrontController::class, 'editprofile'])->name('front.editprofile');
+Route::put('/updateprofile', [FrontController::class, 'updateprofile'])->name('front.updateprofile');
 Route::get('/help', [FrontController::class, 'help'])->name('front.help');
 Route::get('/comunity', [FrontController::class, 'comunity'])->name('front.comunity');
 
