@@ -64,8 +64,7 @@ class JobController extends Controller
         $job->update_id = Auth::id();
         $job->save();
 
-        return redirect()->route('company.dashboard')
-            ->with('success', 'Lowongan berhasil ditambahkan!');
+        return redirect()->route('company.dashboard');
     }
 
     public function show(Job $job)
