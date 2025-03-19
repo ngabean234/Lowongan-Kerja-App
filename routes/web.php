@@ -5,8 +5,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\CompanyAuthController;
-use App\Http\Controllers\CompanyDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +18,23 @@ use App\Http\Controllers\CompanyDashboardController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $featuredJobs = App\Models\Job::with(['company', 'jobType', 'city'])
+                    ->where('archived', 'N')
+                    ->latest()
+                    ->take(8)
+                    ->get();
+    $featuredCompanies = App\Models\Company::with(['jobs', 'city'])
+                    ->where('archived', 'N')
+                    ->latest()
+                    ->take(8)
+                    ->get();
+    return view('welcome', compact('featuredJobs', 'featuredCompanies'));
 });
 
 //DashboardController
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/welcome', [DashboardController::class, 'welcome'])->name('welcome');
 
@@ -65,3 +73,4 @@ Route::middleware(['auth', 'role:company'])->group(function () {
 
 // Public Job Routes
 Route::get('/search-jobs', [JobController::class, 'search'])->name('search.jobs');
+Route::get('/jobs/{job}', [JobController::class, 'publicShow'])->name('jobs.public.show');

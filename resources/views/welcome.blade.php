@@ -74,108 +74,85 @@
             </div>
         </section>
 
-        <!-- Explore by Category Section -->
-        {{-- <section class="container mx-auto mt-10">
-            <h2 class="text-3xl font-bold mb-6">Explore by <span class="text-blue-400">category</span></h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Category Cards -->
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition" aria-label="Design">
-                    <h3 class="font-bold text-lg">Design</h3>
-                    <p class="text-gray-400">235 jobs available &rarr;</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition" aria-label="Sales">
-                    <h3 class="font-bold text-lg">Sales</h3>
-                    <p class="text-gray-400">756 jobs available &rarr;</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition" aria-label="Marketing">
-                    <h3 class="font-bold text-lg">Marketing</h3>
-                    <p class="text-gray-400">140 jobs available &rarr;</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition" aria-label="Finance">
-                    <h3 class="font-bold text-lg">Finance</h3>
-                    <p class="text-gray-400">325 jobs available &rarr;</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition" aria-label="Technology">
-                    <h3 class="font-bold text-lg">Technology</h3>
-                    <p class="text-gray-400">436 jobs available &rarr;</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition" aria-label="Engineering">
-                    <h3 class="font-bold text-lg">Engineering</h3>
-                    <p class="text-gray-400">542 jobs available &rarr;</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition" aria-label="Business">
-                    <h3 class="font-bold text-lg">Business</h3>
-                    <p class="text-gray-400">211 jobs available &rarr;</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition" aria-label="Human Resource">
-                    <h3 class="font-bold text-lg">Human Resource</h3>
-                    <p class="text-gray-400">346 jobs available &rarr;</p>
-                </div>
-            </div>
-            <div class="text-right mt-4">
-                <a href="#" class="text-blue-400 hover:underline">Show all jobs &rarr;</a>
-            </div>
-        </section> --}}
-
         <!-- Featured Jobs Section -->
-        {{-- <section class="container mx-auto mt-10">
-            <h2 class="text-3xl font-bold mb-6">Featured <span class="text-blue-400">Jobs</span></h2>
+        <section class="container mx-auto mt-10 pb-10 p-10">
+            <h2 class="text-3xl font-bold mb-6">Lowongan <span class="text-yellow-400">Terbaru</span></h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Featured Job Cards -->
+                @forelse($featuredJobs as $job)
                 <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition">
-                    <h3 class="font-bold text-lg">Email Marketing</h3>
-                    <p class="text-gray-400">Revolut • Madrid, Spain</p>
-                    <p class="mt-2 text-sm text-green-500">Full Time</p>
-                    <p class="mt-2 text-xs text-gray-400">Categories: Marketing, Design</p>
+                    <div class="flex items-center mb-3">
+                        <div class="bg-gray-700 rounded-full p-2 mr-3">
+                            @if($job->company && $job->company->company_logo)
+                                <img src="{{ asset('company/' . $job->company->company_logo) }}" alt="{{ $job->company->name }}" class="object-contain h-10">
+                            @else
+                                <div class="bg-light rounded-full p-2 flex justify-center items-center">
+                                    <i class="bi bi-building text-yellow-400 text-xl"></i>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">{{ $job->name }}</h3>
+                            <p class="text-gray-400">{{ $job->company->name ?? 'Perusahaan' }} • {{ $job->city->name ?? 'Lokasi tidak tersedia' }}</p>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-sm bg-yellow-400 text-gray-900 inline-block px-2 py-1 rounded">{{ $job->jobType->name ?? 'Full Time' }}</p>
+                    <p class="mt-2 text-xs text-gray-400 line-clamp-2">{{ Str::limit($job->description, 100) }}</p>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-xs text-gray-400">{{ $job->created_at->diffForHumans() }}</span>
+                        <a href="{{ route('jobs.public.show', $job) }}" class="text-yellow-400 hover:underline text-sm">Lihat Detail</a>
+                    </div>
                 </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition">
-                    <h3 class="font-bold text-lg">Brand Designer</h3>
-                    <p class="text-gray-400">Dropbox • San Francisco, US</p>
-                    <p class="mt-2 text-sm text-green-500">Full Time</p>
-                    <p class="mt-2 text-xs text-gray-400">Categories: Design, Business</p>
+                @empty
+                <div class="col-span-4 text-center py-8 bg-gray-800 rounded-lg">
+                    <i class="bi bi-briefcase text-yellow-400 text-4xl mb-2"></i>
+                    <p class="text-lg mb-3">Belum ada lowongan pekerjaan tersedia</p>
+                    <p class="text-gray-400">Silakan cek kembali nanti untuk melihat lowongan terbaru</p>
                 </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition">
-                    <h3 class="font-bold text-lg">Email Marketing</h3>
-                    <p class="text-gray-400">Pitch • Berlin, Germany</p>
-                    <p class="mt-2 text-sm text-green-500">Full Time</p>
-                    <p class="mt-2 text-xs text-gray-400">Categories: Marketing</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition">
-                    <h3 class="font-bold text-lg">Visual Designer</h3>
-                    <p class="text-gray-400">Blinklist • Granada, Spain</p>
-                    <p class="mt-2 text-sm text-green-500">Full Time</p>
-                    <p class="mt-2 text-xs text-gray-400">Categories: Design</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition">
-                    <h3 class="font-bold text-lg">Product Designer</h3>
-                    <p class="text-gray-400">ClassPass • Manchester, UK</p>
-                    <p class="mt-2 text-sm text-green-500">Full Time</p>
-                    <p class="mt-2 text-xs text-gray-400">Categories: Marketing, Design</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition">
-                    <h3 class="font-bold text-lg">Lead Designer</h3>
-                    <p class="text-gray-400">Canva • Ontario, Canada</p>
-                    <p class="mt-2 text-sm text-green-500">Full Time</p>
-                    <p class="mt-2 text-xs text-gray-400">Categories: Design, Business</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition">
-                    <h3 class="font-bold text-lg">Brand Strategist</h3>
-                    <p class="text-gray-400">GoDaddy • Marseille, France</p>
-                    <p class="mt-2 text-sm text-green-500">Full Time</p>
-                    <p class="mt-2 text-xs text-gray-400">Categories: Marketing, Business</p>
-                </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition">
-                    <h3 class="font-bold text-lg">Data Analyst</h3>
-                    <p class="text-gray-400">Twitter • San Diego, US</p>
-                    <p class="mt-2 text-sm text-green-500">Full Time</p>
-                    <p class="mt-2 text-xs text-gray-400">Categories: Technology</p>
-                </div>
+                @endforelse
             </div>
-            <div class="text-right mt-4">
-                <a href="#" class="text-blue-400 hover:underline">Show all jobs &rarr;</a>
-            </div>
+            {{-- <div class="text-right mt-6">
+                <a href="{{ route('search.jobs') }}" class="text-yellow-400 hover:underline">Lihat semua lowongan &rarr;</a>
+            </div> --}}
         </section>
-    </main> --}}
+
+        <!-- Featured Companies Section -->
+        <section class="container mx-auto mt-10 pb-10 p-10">
+            <h2 class="text-3xl font-bold mb-6">Perusahaan <span class="text-yellow-400">Terbaru</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Featured Company Cards -->
+                @forelse($featuredCompanies as $company)
+                <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:bg-gray-700 transition">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-gray-700 rounded-full p-2 mr-3">
+                            @if($company->company_logo)
+                                <img src="{{ asset('company/' . $company->company_logo) }}" alt="{{ $company->name }}" class="object-contain h-10">
+                            @else
+                                <div class="bg-light rounded-full p-2 flex justify-center items-center">
+                                    <i class="bi bi-building text-yellow-400 text-xl"></i>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">{{ $company->name }}</h3>
+                            <p class="text-gray-400">{{ $company->city->name ?? 'Lokasi tidak tersedia' }}</p>
+                            <p class="text-gray-400">Lowongan: {{ $company->jobs->count() }}</p>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <div class="col-span-4 text-center py-8 bg-gray-800 rounded-lg">
+                    <i class="bi bi-briefcase text-yellow-400 text-4xl mb-2"></i>
+                    <p class="text-lg mb-3">Belum ada perusahaan tersedia</p>
+                    <p class="text-gray-400">Silakan cek kembali nanti untuk melihat perusahaan terbaru</p>
+                </div>
+                @endforelse
+            </div>
+            {{-- <div class="text-right mt-6">
+                <a href="{{ route('search.jobs') }}" class="text-yellow-400 hover:underline">Lihat semua perusahaan &rarr;</a>
+            </div> --}}
+        </section>
+    </main>
 
     <!-- Footer -->
     <x-footer></x-footer>
