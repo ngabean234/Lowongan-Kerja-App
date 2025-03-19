@@ -21,13 +21,23 @@ use App\Http\Controllers\Company\JobController as CompanyJobController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $featuredJobs = App\Models\Job::with(['company', 'jobType', 'city'])
+                    ->where('archived', 'N')
+                    ->latest()
+                    ->take(8)
+                    ->get();
+    $featuredCompanies = App\Models\Company::with(['jobs', 'city'])
+                    ->where('archived', 'N')
+                    ->latest()
+                    ->take(8)
+                    ->get();
+    return view('welcome', compact('featuredJobs', 'featuredCompanies'));
 });
 
 //DashboardController
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/welcome', [DashboardController::class, 'welcome'])->name('welcome');
 
