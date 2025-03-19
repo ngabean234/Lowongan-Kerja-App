@@ -20,8 +20,8 @@
                 <li><a href="#" class="hover:text-yellow-400">Blog</a></li>
             </ul>
             <div>
-                <a href="{{ route('register') }}" class="text-yellow-400 mr-4" aria-label="Register">Register</a>
-                <a href="{{ route('login') }}" class="bg-yellow-400 text-gray-900 px-4 py-2 rounded" aria-label="Sign In">Sign In</a>
+                <a href="{{ route('login') }}" class="bg-yellow-400 text-gray-900 px-4 py-2 rounded" aria-label="Sign In">Masuk</a>
+                <a href="{{ route('company.login') }}" class="text-yellow-400 mr-4" aria-label="Perusahaan">Untuk Perusahaan</a>
             </div>
         </nav>
     </header>

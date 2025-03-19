@@ -5,6 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\CompanyAuthController;
+use App\Http\Controllers\CompanyDashboardController;
+use App\Http\Controllers\Company\JobController as CompanyJobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +44,24 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Company Auth Routes
+Route::get('/company/login', [CompanyAuthController::class, 'showLoginForm'])->name('company.login');
+Route::post('/company/login', [CompanyAuthController::class, 'login']);
+Route::get('/company/register', [CompanyAuthController::class, 'showRegisterForm'])->name('company.register');
+Route::post('/company/register', [CompanyAuthController::class, 'register']);
+Route::post('/company/logout', [CompanyAuthController::class, 'logout'])->name('company.logout');
+
+// Company Dashboard Routes
+Route::middleware(['auth', 'role:company'])->group(function () {
+    Route::get('/company/dashboard', [CompanyDashboardController::class, 'index'])->name('company.dashboard');
+    Route::get('/company/profile', [CompanyDashboardController::class, 'profile'])->name('company.profile');
+    Route::put('/company/profile', [CompanyDashboardController::class, 'updateProfile'])->name('company.profile.update');
+    Route::resource('jobs', JobController::class);
+    Route::put('/jobs/{job}/archive', [JobController::class, 'archive'])->name('jobs.archive');
+    Route::put('/jobs/{job}/unarchive', [JobController::class, 'unarchive'])->name('jobs.unarchive');
+});
+
+// Public Job Routes
 Route::get('/search-jobs', [JobController::class, 'search'])->name('search.jobs');
+Route::get('/jobs/{job}', [JobController::class, 'publicShow'])->name('jobs.public.show');

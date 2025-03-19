@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->text('requirement');
-            $table->string('min_salary');
-            $table->string('max_salary');
-            $table->string('archived');
-            $table->string('create_id');
-            $table->string('update_id');
+            $table->bigInteger('min_salary');
+            $table->bigInteger('max_salary');
+            $table->string('archived')->default('N');
+            $table->string('create_id')->default('1');
+            $table->string('update_id')->default('1');
             $table->timestamps();
         });
     }

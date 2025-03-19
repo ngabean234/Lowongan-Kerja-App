@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('telephone');
-            $table->string('company_icon');
-            $table->string('company_logo');
-            $table->string('archived');
+            $table->string('company_icon')->nullable();
+            $table->string('company_logo')->nullable();
+            $table->string('archived')->default('N');
             $table->string('create_id');
             $table->string('update_id');
             $table->timestamps();

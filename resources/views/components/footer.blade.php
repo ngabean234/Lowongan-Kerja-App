@@ -13,7 +13,7 @@
                     <li style="margin: 20px 0;"><a href="">Explore careers</a></li>
                     <li style="margin: 20px 0;"><a href="">Explore salaries</a></li>
                     <li style="margin: 20px 0;"><a href="">Explore companies</a></li>
-                    <li style="margin: 20px 0;"><a href="{{ route('comunity') }}">Community</a></li>
+                    <li style="margin: 20px 0;"><a href="{{ route('front.comunity') }}">Community</a></li>
                 </ul>
             </div>
             <div style="width: 200px;">

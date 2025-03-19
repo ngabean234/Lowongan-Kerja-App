@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('tbl-job-types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->binary('values');
-            $table->string('archived');
-            $table->string('create_id');
-            $table->string('update_id');
+            $table->string('archived')->default('N');
+            $table->string('create_id')->default('1');
+            $table->string('update_id')->default('1');
             $table->timestamps();
         });
     }
