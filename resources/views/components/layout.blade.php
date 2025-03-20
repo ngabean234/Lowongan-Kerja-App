@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,10 +14,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="{{ asset('css/preloader.css') }}">
     <title>LowKer - Lowongan Pekerjaan</title>
 </head>
 
 <body class="bg-gray-900 text-white">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div>
+            <div class="bar bar1"></div>
+            <div class="bar bar2"></div>
+            <div class="bar bar3"></div>
+            <div class="bar bar4"></div>
+            <div class="bar bar5"></div>
+            <div class="bar bar6"></div>
+            <div class="bar bar7"></div>
+            <div class="bar bar8"></div>
+        </div>
+    </div>
     <div class="min-h-full">
         <x-header>{{ $title }}</x-header>
 
@@ -28,5 +43,18 @@
         </main>
         <x-footer></x-footer>
     </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                preloader.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => preloader.style.display = 'none', 500);
+            },);
+        });
+    </script>
+
 </body>
+
 </html>
